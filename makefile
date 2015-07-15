@@ -1,17 +1,16 @@
-CC=c++
+CC=cc
 CCFlags=
-SOURCES=main.cpp parser.cpp
-OBJECTS=$(SOURCES:.cpp=.o)
+SOURCES=main.c parser.c
+OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=seashell
-
 
 all: shell
 
 shell: objects
-	$(CC) $(CCFLAGS) $(OBJECTS)
+	$(CC) $(CCFLAGS) $(OBJECTS) -o shell
 
 objects: 
-	c++ -c $(SOURCES)
+	$(CC) -c $(SOURCES)
 
 clean:
-	rm *o
+	rm *.o
