@@ -26,7 +26,7 @@ char **tokenize_str(char command[], char delimiter[]) {
         strings[delimiter_count-1] = token;
         
         // Pass NULL to obtain the next token.
-        token = strtok(NULL, " "); 
+        token = strtok(NULL, delimiter); 
     }
     
     // Increase the size of the array, so that the NULL char can be added.
