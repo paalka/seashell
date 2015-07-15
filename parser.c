@@ -11,31 +11,31 @@ char **tokenize_str(char command[], char delimiter[]) {
      * Returns a array of strings.
      */
 
-    char **res = NULL;
-    char *p = strtok(command, delimiter);
+    char **strings = NULL;
+    char *token = strtok(command, delimiter);
     int n_spaces = 0;
     int i = 0;
 
     // Use strtok to obtain the tokens from the string.
-    while (p) {
+    while (token) {
         n_spaces++;
-        res = realloc(res, sizeof(char*) *n_spaces);
-        check(res != NULL, "Mem allocation failed!");
+        strings = realloc(strings, sizeof(char*) *n_spaces);
+        check(strings != NULL, "Mem allocation failed!");
         
-        res[n_spaces-1] = p;
+        strings[n_spaces-1] = token;
         
         // Pass NULL to obtain the next token.
-        p = strtok (NULL, " "); 
+        token = strtok (NULL, " "); 
     }
     
     // Increase the size of the array, so that the NULL char can be added.
-    res = realloc(res, sizeof(char*) *(n_spaces+1));
-    res[n_spaces] = NULL;
+    strings = realloc(strings, sizeof(char*) *(n_spaces+1));
+    strings[n_spaces] = NULL;
 
-    return res;
+    return strings;
 
 error:
-    if(res) free(res);
+    if(strings) free(strings);
     exit(-1);
 }
 
