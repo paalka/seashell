@@ -30,7 +30,7 @@ char **tokenize_str(char command[], char delimiter[]) {
     
     // Increase the size of the array, so that the NULL char can be added.
     res = realloc(res, sizeof(char*) *(n_spaces+1));
-    res[n_spaces] = 0;
+    res[n_spaces] = NULL;
 
     return res;
 
