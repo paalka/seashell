@@ -3,16 +3,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char **tokenize_str(char command[], char delimiter[]) {
+char **tokenize_str(char string[], char delimiter[]) {
     /*
-     * Divides the string 'command' into several strings.
+     * Divides the string 'string' into several strings.
      * The string is divided on each position where the char 'delimiter' is
      * found.
      * Returns a array of strings.
      */
 
     char **strings = NULL;
-    char *token = strtok(command, delimiter);
+    char *token = strtok(string, delimiter);
 
     int delimiter_count = 0;
     int i = 0;
