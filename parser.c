@@ -20,17 +20,17 @@ char **tokenize_str(char command[], char delimiter[]) {
     // Use strtok to obtain the tokens from the string.
     while (token) {
         delimiter_count++;
-        strings = realloc(strings, sizeof(char*) *delimiter_count);
+        strings = realloc(strings, sizeof(char*) * delimiter_count);
         check(strings != NULL, "Mem allocation failed!");
         
         strings[delimiter_count-1] = token;
         
         // Pass NULL to obtain the next token.
-        token = strtok (NULL, " "); 
+        token = strtok(NULL, " "); 
     }
     
     // Increase the size of the array, so that the NULL char can be added.
-    strings = realloc(strings, sizeof(char*) *(delimiter_count+1));
+    strings = realloc(strings, sizeof(char*) * (delimiter_count+1));
     strings[delimiter_count] = '\0';
 
     return strings;
