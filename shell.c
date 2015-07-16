@@ -16,6 +16,13 @@ error:
     return -1;
 }
 
+int process_input(void) {
+    printf("> ");
+
+    // TODO: Find a way of getting lines of input from the user,
+    return 0;
+}
+
 int main(int argc, char **argv) {
     return 0;
 }
