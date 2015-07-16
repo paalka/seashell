@@ -11,6 +11,7 @@ int execute_ext_command(char *file, char **params)
 
     // create a child process for the command to be executed.
     pid_t pid = fork();
+    check(pid == 0, "Failed to create child process.");
 
     error_code = execvp(file, params);
     check(error_code == 0, "Failed to execute command.");
@@ -18,7 +19,6 @@ error:
     // TODO: Clean up the child process.
     return -1;
 }
-
 
 char *get_user_input(void)
 {
