@@ -1,5 +1,5 @@
 #include "parser.h"
-#include "dbg.h"
+#include "lib/dbg.h"
 #include <stdio.h>
 #include <unistd.h>
 

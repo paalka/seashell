@@ -1,4 +1,4 @@
-#include "../dbg.h"
+#include "../lib/dbg.h"
 #include "../shell.h"
 
 int change_directory(struct Config current_shell, char *new_dir)
