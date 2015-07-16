@@ -1,12 +1,12 @@
-CC = cc
-CFLAGS = -Wall -g
-LIBS = -lreadline
-SOURCES = shell.c parser.c
-OBJECTS = $(SOURCES:.c=.o)
-OUT_FOLDER = bin
-BUILTINS = builtins
-RM = rm -fr
-DEPS =
+CC=cc
+CFLAGS=-Wall -g
+LIBS=-lreadline
+SOURCES=shell.c parser.c
+OBJECTS=$(SOURCES:.c=.o)
+OUT_FOLDER=bin
+BUILTINS=builtins
+RM=rm -fr
+DEPS=
 
 all: $(OBJECTS) shell cd
 
