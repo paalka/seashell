@@ -2,6 +2,8 @@
 #include "lib/dbg.h"
 #include <stdio.h>
 #include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 int execute_ext_command(char *file, char **params)
 {
@@ -17,12 +19,12 @@ error:
     return -1;
 }
 
-int process_input(void)
-{
-    printf("> ");
 
-    // TODO: Find a way of getting lines of input from the user,
-    return 0;
+char *get_user_input(void)
+{
+    char *input = readline("> ");
+    add_history(input);
+    return input;
 }
 
 int main(int argc, char **argv)
