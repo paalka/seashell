@@ -29,5 +29,12 @@ char *get_user_input(void)
 
 int main(int argc, char **argv)
 {
+    char *input;
+    do{
+        char **args;
+        input = get_user_input();
+        args = tokenize_str(input, " ");
+    } while(input);
+
     return 0;
 }
