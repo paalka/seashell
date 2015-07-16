@@ -7,19 +7,19 @@ OUT_FOLDER = bin
 BUILTINS = builtins
 DEPS =
 
-all: objects shell parser cd
+all: $(OBJECTS) shell parser cd
 
 %.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS) $(LIBS)
 
 shell: $(OBJECTS)
 	$(CC) -o $(OUT_FOLDER)/$@ $^ $(CFLAGS) $(LIBS)
 
 parser: $(OBJECTS)
-	$(CC) $(CFLAGS) $< $@.c -o $(OUT_FOLDER)/$@
+	$(CC) $< $@.c -o $(OUT_FOLDER)/$@ $(CFLAGS) $(LIBS)
 
 cd:
-	$(CC) $(CFLAGS) $(BUILTINS)/$@.c -o $(OUT_FOLDER)/$@
+	$(CC) $(BUILTINS)/$@.c -o $(OUT_FOLDER)/$@ $(CFLAGS)
 
 .PHONY: clean
 clean:
