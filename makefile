@@ -1,22 +1,26 @@
-CC=cc
-CCFlags=
-SOURCES=main.c parser.c
-OBJECTS=$(SOURCES:.c=.o)
-OUT_FOLDER=bin
+CC = cc
+CFLAGS = -Wall -g
+LIBS = -lreadline
+SOURCES = shell.c parser.c
+OBJECTS = $(SOURCES:.c=.o)
+OUT_FOLDER = bin
+BUILTINS = builtins
+DEPS =
 
-all: shell
+all: objects shell parser cd
 
-shell: objects
-	$(CC) $(CCFLAGS) $(OBJECTS) -o $(OUT_FOLDER)/shell
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
-objects: 
-	$(CC) -c $(SOURCES)
+shell: $(OBJECTS)
+	$(CC) -o $(OUT_FOLDER)/$@ $^ $(CFLAGS) $(LIBS)
 
-parser:
-	$(CC) $(CCFLAGS) parser.c -o $(OUT_FOLDER)/parser
+parser: $(OBJECTS)
+	$(CC) $(CFLAGS) $< $@.c -o $(OUT_FOLDER)/$@
 
 cd:
-	$(CC) $(CCFLAGS) builtins/cd.c -o $(OUT_FOLDER)/cd
+	$(CC) $(CFLAGS) $(BUILTINS)/$@.c -o $(OUT_FOLDER)/$@
 
+.PHONY: clean
 clean:
-	rm *.o
+	$(RM) *.o
