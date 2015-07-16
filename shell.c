@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int execute_ext_command(char *file, char **params) {
+int execute_ext_command(char *file, char **params)
+{
     int error_code;
 
     // create a child process for the command to be executed.
@@ -16,13 +17,15 @@ error:
     return -1;
 }
 
-int process_input(void) {
+int process_input(void)
+{
     printf("> ");
 
     // TODO: Find a way of getting lines of input from the user,
     return 0;
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     return 0;
 }

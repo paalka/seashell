@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char **tokenize_str(char string[], char delimiter[]) {
+char **tokenize_str(char string[], char delimiter[])
+{
     /*
      * Divides the string 'string' into several strings.
      * The string is divided on each position where the char 'delimiter' is
@@ -39,7 +40,8 @@ error:
     exit(-1);
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     char *cmd = strdup("hi");
     tokenize_str(cmd, " ");
 }
