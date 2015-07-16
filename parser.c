@@ -40,9 +40,3 @@ error:
     if(strings) free(strings);
     exit(-1);
 }
-
-int main(int argc, char **argv)
-{
-    char *cmd = strdup("hi");
-    tokenize_str(cmd, " ");
-}
