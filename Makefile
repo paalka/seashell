@@ -5,22 +5,20 @@ SOURCES = shell.c parser.c
 OBJECTS = $(SOURCES:.c=.o)
 OUT_FOLDER = bin
 BUILTINS = builtins
+RM = rm -fr
 DEPS =
 
-all: $(OBJECTS) shell parser cd
+all: $(OBJECTS) shell cd
 
 %.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS) $(LIBS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 shell: $(OBJECTS)
 	$(CC) -o $(OUT_FOLDER)/$@ $^ $(CFLAGS) $(LIBS)
-
-parser: $(OBJECTS)
-	$(CC) $< $@.c -o $(OUT_FOLDER)/$@ $(CFLAGS) $(LIBS)
 
 cd:
 	$(CC) $(BUILTINS)/$@.c -o $(OUT_FOLDER)/$@ $(CFLAGS)
 
 .PHONY: clean
 clean:
-	$(RM) *.o
+	$(RM) *.o $(OUT_FOLDER)/*
