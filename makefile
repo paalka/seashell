@@ -15,5 +15,8 @@ objects:
 parser:
 	$(CC) $(CCFLAGS) parser.c -o $(OUT_FOLDER)/parser
 
+cd:
+	$(CC) $(CCFLAGS) builtins/cd.c -o $(OUT_FOLDER)/cd
+
 clean:
 	rm *.o
