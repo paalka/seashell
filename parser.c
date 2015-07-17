@@ -18,7 +18,6 @@ char **tokenize_str(char string[], char delimiter[])
 
     int delimiter_count = 0;
 
-    // Use strtok to obtain the tokens from the string.
     while (token) {
         delimiter_count++;
 
