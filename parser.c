@@ -14,8 +14,8 @@ char **tokenize_str(char string[], char delimiter[])
 
     char **strings = malloc(sizeof(char*) * strlen(string));
     check(strings != NULL, "Memory allocation failed.");
-    char *token = strtok(string, delimiter);
 
+    char *token = strtok(string, delimiter);
     int delimiter_count = 0;
 
     while (token) {
