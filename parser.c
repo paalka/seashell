@@ -30,7 +30,7 @@ char **tokenize_str(char string[], char delimiter[])
     
     strings[delimiter_count] = 0;
 
-    // Descrease the size of the array to avoid using nesesecary space.
+    // Descrease the size of the array to avoid using unnecessary space.
     strings = realloc(strings, sizeof(char*) * (delimiter_count));
     check(strings != NULL, "Memory reallocation failed.");
 
