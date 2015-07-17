@@ -15,6 +15,8 @@ int execute_ext_command(char *file, char **params)
 
     error_code = execvp(file, params);
     check(error_code == 0, "Failed to execute command.");
+
+    return 0;
 error:
     // TODO: Clean up the child process.
     return -1;
