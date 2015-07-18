@@ -36,6 +36,5 @@ char **tokenize_str(char string[], char delimiter[])
     return strings;
 
 error:
-    if(strings) free(strings);
     exit(-1);
 }
