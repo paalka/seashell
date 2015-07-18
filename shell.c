@@ -1,9 +1,38 @@
 #include "parser.h"
 #include "lib/dbg.h"
+#include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+
+int get_array_len(char **array)
+{
+    int i = 0;
+    while (array[i] != '\0') {
+        i++;
+    }
+
+    return i;
+}
+
+char **get_subset(int offset, char **array)
+{
+    int i;
+    int array_size = get_array_len(array);
+
+    char **args = malloc(sizeof(char*) * array_size);
+    check(args != NULL, "Memory allocation failed.");
+
+    for (i = 0; (i + offset) < array_size; i++) {
+        args[i] = array[i+offset];
+     }
+
+     return args;
+
+ error:
+     exit(-1);
+}  
 
 int execute_ext_command(char *file, char **params)
 {
@@ -17,6 +46,7 @@ int execute_ext_command(char *file, char **params)
     check(error_code == 0, "Failed to execute command.");
 
     return 0;
+
 error:
     // TODO: Clean up the child process.
     return -1;
@@ -35,7 +65,12 @@ int main(int argc, char **argv)
     do {
         char **args;
         input = get_user_input();
-        args = tokenize_str(input, " ");
+        char **tokenized_input = tokenize_str(input, " ");
+
+        char *file = tokenized_input[0];
+        args = get_subset(1, tokenized_input);
+
+        execute_ext_command(file, args);
     } while(input);
 
     return 0;
