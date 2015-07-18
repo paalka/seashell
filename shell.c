@@ -62,8 +62,8 @@ char *get_user_input(void)
 int main(int argc, char **argv)
 {
     char *input;
+    char **args;
     do {
-        char **args;
         input = get_user_input();
         char **tokenized_input = tokenize_str(input, " ");
 
