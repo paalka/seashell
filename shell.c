@@ -8,6 +8,11 @@
 
 int get_array_len(char **array)
 {
+    /*
+     * Get the length of the given array 'array'.
+     * Returns the length of the array as an int.
+     */
+
     int i = 0;
     while (array[i] != '\0') {
         i++;
@@ -18,6 +23,11 @@ int get_array_len(char **array)
 
 char **get_subset(int offset, char **array)
 {
+    /*
+     * Get the subset of the given array 'array'.
+     * The subset is inclusive and begins at the specified offset 'offset'.
+     */
+
     int i;
     int array_size = get_array_len(array);
 
@@ -36,6 +46,13 @@ char **get_subset(int offset, char **array)
 
 int execute_ext_command(char *file, char **params)
 {
+    /*
+     * Executes an external command by spawning an subprocess, and then
+     * executing the command. The file to execute is set by the string 'file',
+     * the params for this command is determined by 'params'.
+     * Returns an int indicating whether the execution was successful or not. 
+     */
+
     int error_code;
 
     // create a child process for the command to be executed.
