@@ -65,12 +65,14 @@ int main(int argc, char **argv)
     char **args;
     do {
         input = get_user_input();
-        char **tokenized_input = tokenize_str(input, " ");
+        if (strcmp(input, "") != 0) {
+            char **tokenized_input = tokenize_str(input, " ");
 
-        char *file = tokenized_input[0];
-        args = get_subset(1, tokenized_input);
+            char *file = tokenized_input[0];
+            args = get_subset(1, tokenized_input);
 
-        execute_ext_command(file, args);
+            execute_ext_command(file, args);
+        }
     } while(input);
 
     return 0;
