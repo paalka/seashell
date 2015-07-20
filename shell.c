@@ -71,6 +71,12 @@ error:
 
 char *get_user_input(void)
 {
+    /*
+     * Obtains one or multiple lines of input from the user through stdin, and
+     * adds it to the history.
+     * Returns the string given by the user.
+     */
+
     char *input = readline("> ");
     add_history(input);
     return input;
