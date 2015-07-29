@@ -24,28 +24,6 @@ int execute_command(char **args)
     return 1;
 }
 
-char **get_subset(int offset, char **array)
-{
-    /*
-     * Get the subset of the given array 'array'.
-     * The subset is inclusive and begins at the specified offset 'offset'.
-     */
-
-    int i;
-    int array_size = get_array_len(array);
-
-    char **args = malloc(sizeof(char*) * array_size);
-    check(args != NULL, "Memory allocation failed.");
-
-    for (i = 0; (i + offset) < array_size; i++) {
-        args[i] = array[i+offset];
-     }
-
-     return args;
-
- error:
-     exit(-1);
-}  
 
 int execute_ext_command(char *file, char **params)
 {
