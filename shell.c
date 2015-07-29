@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 
 int get_array_len(char **array)
 {
@@ -77,8 +75,7 @@ char *get_user_input(void)
      * Returns the string given by the user.
      */
 
-    char *input = readline("> ");
-    add_history(input);
+    char *input = readline();
     return input;
 }
 
