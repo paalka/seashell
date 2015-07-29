@@ -1,9 +1,9 @@
 #include "lib/dbg.h"
-#include <string.h>
+#include "parser.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-char **tokenize_str(char string[], char delimiter[])
+char **tokenize_str(char line[])
 {
     /*
      * Divides the string 'string' into several strings.
@@ -12,30 +12,36 @@ char **tokenize_str(char string[], char delimiter[])
      * Returns a array of strings.
      */
 
-    char **strings = malloc(sizeof(char*) * strlen(string));
-    check(strings != NULL, "Memory allocation failed.");
+    int bufsize = TOK_BUFSIZE;
+    int position = 0;
+    char **tokens = malloc(sizeof(char*) * bufsize);
+    check(tokens != NULL, "Memory allocation failed.");
 
-    char *token = strtok(string, delimiter);
-    int delimiter_count = 0;
+    char *token = strtok(line, TOK_DELIMITERS);
 
     while (token) {
-        delimiter_count++;
+        tokens[position] = token;
+        position++;
 
-        strings[delimiter_count-1] = token;
+        if (position >= bufsize) {
+            bufsize += TOK_BUFSIZE;
+            tokens = realloc(tokens, sizeof(char*) * bufsize);
+            check(tokens != NULL, "Memory allocation failed.");
+        } 
         
         // Pass NULL to obtain the next token.
-        token = strtok(NULL, delimiter); 
+        token = strtok(NULL, TOK_DELIMITERS); 
     }
     
-    strings[delimiter_count] = 0;
-
     // Descrease the size of the array to avoid using unnecessary space.
-    strings = realloc(strings, sizeof(char*) * (delimiter_count));
-    check(strings != NULL, "Memory reallocation failed.");
+    tokens = realloc(tokens, sizeof(char*) * (position+1));
+    check(tokens != NULL, "Memory reallocation failed.");
+    tokens[position] = NULL;
 
-    return strings;
+    return tokens;
 
 error:
+    if(tokens) free(tokens);
     exit(-1);
 }
 

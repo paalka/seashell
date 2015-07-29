@@ -83,6 +83,7 @@ int main(int argc, char **argv)
 {
     char *input;
     char **args;
+    char **tokenized_input;
     do {
         input = get_user_input();
         if (strcmp(input, "") != 0) {
@@ -90,8 +91,9 @@ int main(int argc, char **argv)
 
             char *file = tokenized_input[0];
             args = get_subset(1, tokenized_input);
+            tokenized_input = tokenize_str(input);
 
-            execute_ext_command(file, args);
+            free(tokenized_input);
         }
     } while(input);
 
