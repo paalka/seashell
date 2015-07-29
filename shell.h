@@ -3,8 +3,8 @@
 
 int execute_ext_command(char *file, char **params);
 int *process_input(void);
-int get_array_len(char **array);
 char **get_subset(int offset, char **array);
+int execute_command(char **args);
 
 struct Config {
     char *current_directory;

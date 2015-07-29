@@ -4,19 +4,24 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int get_array_len(char **array)
+int execute_command(char **args)
 {
-    /*
-     * Get the length of the given array 'array'.
-     * Returns the length of the array as an int.
-     */
+    pid_t pid, wpid;
+    int status;
 
-    int i = 0;
-    while (array[i] != '\0') {
-        i++;
+    pid = fork();
+
+    if (pid == 0) {
+        status = execute_ext_command(args[0], args);
+    } else if (pid < 0) {
+        perror("seashell");
+    } else {
+        do {
+            wpid = waitpid(pid, &status, WUNTRACED);
+        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
     }
 
-    return i;
+    return 1;
 }
 
 char **get_subset(int offset, char **array)
@@ -79,23 +84,26 @@ char *get_user_input(void)
     return input;
 }
 
-int main(int argc, char **argv)
+void main_loop(void)
 {
     char *input;
-    char **args;
     char **tokenized_input;
+    int status;
+
     do {
         input = get_user_input();
         if (strcmp(input, "") != 0) {
-            char **tokenized_input = tokenize_str(input, " ");
-
-            char *file = tokenized_input[0];
-            args = get_subset(1, tokenized_input);
             tokenized_input = tokenize_str(input);
+            status = execute_command(tokenized_input);
 
             free(tokenized_input);
         }
-    } while(input);
+    } while (status);
+}
 
-    return 0;
+int main(int argc, char **argv)
+{
+    main_loop();
+
+    return EXIT_SUCCESS;
 }
