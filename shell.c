@@ -1,4 +1,5 @@
 #include "parser.h"
+#include "shell.h"
 #include "lib/dbg.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -24,8 +25,7 @@ int execute_command(char **args)
     return 1;
 }
 
-
-int execute_ext_command(char *file, char **params)
+int execute_ext_command(char *file, char **args)
 {
     /*
      * Executes an external command by spawning an subprocess, and then
@@ -40,14 +40,13 @@ int execute_ext_command(char *file, char **params)
     pid_t pid = fork();
     check(pid != -1, "Failed to create child process.");
 
-    error_code = execvp(file, params);
+    error_code = execvp(file, args);
     check(error_code == 0, "Failed to execute command.");
 
-    return 0;
+    return EXIT_SUCCESS;
 
 error:
-    // TODO: Clean up the child process.
-    return -1;
+    exit(EXIT_FAILURE);
 }
 
 char *get_user_input(void)
