@@ -75,13 +75,21 @@ char *get_user_input(void)
     return input;
 }
 
+void print_prompt(char *cwd_buf, size_t buf_siz)
+{
+    printf("\n%s%s%s\n> ", ANSI_COLOR_BLUE, getcwd(cwd_buf, buf_siz), ANSI_COLOR_RESET);
+    return;
+}
+
 void main_loop(void)
 {
     char *input;
+    char cwd[1024];
+    size_t cwd_buf = sizeof(cwd);
     char **tokenized_input;
     int status;
-
     do {
+        print_prompt(cwd, cwd_buf);
         input = get_user_input();
         if (strcmp(input, "") != 0) {
             tokenized_input = tokenize_str(input);
