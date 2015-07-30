@@ -1,6 +1,7 @@
 #include "builtin.h"
 #include "lib/dbg.h"
 #include <string.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 char *builtin_cmds[] = {
@@ -27,9 +28,15 @@ int is_builtin(char *arg)
 
 int sea_cd(char **args)
 {
-    check(args[1] != NULL, "Missing argument");
+    // Default to the home dir if no dir is provided.
+    char *dir;
+    if (args[1] == NULL) {
+        dir = getenv("HOME");
+    } else {
+        dir = args[1];
+    }
 
-    int status = chdir(args[1]);
+    int status = chdir(dir);
     check(status == 0, "Could not change dir.");
 
     return 1;
