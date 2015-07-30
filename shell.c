@@ -33,12 +33,11 @@ int execute_command(char **args)
                 wpid = waitpid(pid, &status, WUNTRACED);
             } while (!WIFEXITED(status) && !WIFSIGNALED(status));
         }
-
-        return 1;
     } else {
         status = (*builtin_func[builtin])(args);
-        return 1;
     }
+
+    return 1;
 }
 
 int execute_ext_command(char *file, char **args)
