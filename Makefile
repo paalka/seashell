@@ -1,11 +1,10 @@
 CC=cc
 CFLAGS=-Wall -g
 LIBS=-lreadline
-SOURCES=shell.c parser.c
+SOURCES=shell.c parser.c builtin.c
 OBJECTS_FOLDER=obj
 OBJECTS=$(patsubst %, $(OBJECTS_FOLDER)/%, $(SOURCES:.c=.o))
 OUT_FOLDER=bin
-BUILTINS=builtins
 RM=rm -fr
 DEPS=
 
