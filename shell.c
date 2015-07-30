@@ -56,9 +56,13 @@ int execute_ext_command(char *file, char **args)
     check(pid != -1, "Failed to create child process.");
 
     error_code = execvp(file, args);
-    check(error_code == 0, "Failed to execute command.");
+    if (error_code) {
+        return error_code;
+    }
+    else {
+        return EXIT_SUCCESS;
+    }
 
-    return EXIT_SUCCESS;
 
 error:
     exit(EXIT_FAILURE);
