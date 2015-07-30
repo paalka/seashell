@@ -16,17 +16,19 @@ int (*builtin_func[]) (char **) = {
 
 int execute_command(char **args)
 {
-
     int builtin = is_builtin(args[0]);
     int status;
+
     if (builtin == -1) {
         pid_t pid, wpid;
-
+        // create a child process for the command to be executed.
         pid = fork();
+        check(pid != -1, "Failed to create child process.");
 
         if (pid == 0) {
             status = execute_ext_command(args[0], args);
         } else if (pid < 0) {
+            status = -1;
             perror("seashell");
         } else {
             do {
@@ -38,6 +40,8 @@ int execute_command(char **args)
     }
 
     return 1;
+error:
+    return -1;
 }
 
 int execute_ext_command(char *file, char **args)
@@ -51,21 +55,12 @@ int execute_ext_command(char *file, char **args)
 
     int error_code;
 
-    // create a child process for the command to be executed.
-    pid_t pid = fork();
-    check(pid != -1, "Failed to create child process.");
-
     error_code = execvp(file, args);
-    if (error_code) {
-        return error_code;
-    }
-    else {
-        return EXIT_SUCCESS;
-    }
+    check(error_code == 0, "Failed to execute command.");
 
-
+    return EXIT_SUCCESS;
 error:
-    exit(EXIT_FAILURE);
+    return EXIT_FAILURE;
 }
 
 char *get_user_input(void)
