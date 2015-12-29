@@ -5,3 +5,6 @@ shells really work.
 
 Hopefully I'll write some sort of a guide / summary when I get a better
 understanding.
+
+### Dependencies
+* libreadline-dev
