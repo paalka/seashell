@@ -17,9 +17,7 @@ int sea_num_builtins()
 
 int is_builtin(char *arg)
 {
-    int i = 0;
-
-    for (i = 0; i < sea_num_builtins(); i++) {
+    for (int i = 0; i < sea_num_builtins(); i++) {
         if (strcmp(arg, builtin_cmds[i]) == 0) {
             return i;
         }
