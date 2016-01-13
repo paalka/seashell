@@ -1,5 +1,5 @@
 CC=cc
-CFLAGS=-Wall -g
+CFLAGS=-Wall -g -std=c99
 LIBS=-lreadline
 SOURCES=shell.c parser.c builtin.c
 OBJECTS_FOLDER=obj
