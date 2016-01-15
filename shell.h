@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _shell_h
+#define _shell_h
+
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
 #define ANSI_COLOR_YELLOW  "\x1b[33m"
@@ -14,3 +16,5 @@ int execute_ext_command(char *file, char **args);
 int *process_input(void);
 int execute_command(char **args);
 void print_prompt(char *cwd_buf, size_t buf_siz);
+
+#endif
